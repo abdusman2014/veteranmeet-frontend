@@ -1,11 +1,28 @@
+import React, { useState } from "react"
+
+const Login = function () {
+
+  const [pictureFile, setPictureFile] = useState(null);
 
 
- const Login = function () {
+  let [authMode, setAuthMode] = useState("signin")
+
+  const changeAuthMode = () => {
+    setAuthMode(authMode === "signin" ? "signup" : "signin")
+  }
+
+  if (authMode === "signin") {
     return (
       <div className="Auth-form-container">
         <form className="Auth-form">
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Sign In</h3>
+            <div className="text-center">
+              Not registered yet?{" "}
+              <span className="link-primary" onClick={changeAuthMode}>
+                Sign Up
+              </span>
+            </div>
             <div className="form-group mt-3">
               <label>Email address</label>
               <input
@@ -27,7 +44,7 @@
                 Submit
               </button>
             </div>
-            <p className="forgot-password text-right mt-2">
+            <p className="text-center mt-2">
               Forgot <a href="#">password?</a>
             </p>
           </div>
@@ -36,4 +53,76 @@
     )
   }
 
-  export default Login;
+  return (
+    <div className="Auth-form-container">
+      <form className="Auth-form">
+        <div className="Auth-form-content">
+          <h3 className="Auth-form-title">Sign In</h3>
+          <div className="text-center">
+            Already registered?{" "}
+            <span className="link-primary" onClick={changeAuthMode}>
+              Sign In
+            </span>
+          </div>
+          <div className="form-group mt-3">
+            <label>Full Name</label>
+            <input
+              type="email"
+              className="form-control mt-1"
+              placeholder="e.g Jane Doe"
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label>Gender</label>
+            <input
+              type="text"
+              className="form-control mt-1"
+              placeholder="Male/Female"
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label>Occupation</label>
+            <input
+              type="text"
+              className="form-control mt-1"
+              placeholder="e.g Manager"
+            />
+          </div>
+          <div className="form-group mt-3">
+          <label>Profile Picture</label>
+            <input
+            type="file"
+            placeholder="Picture"
+           // value={pictureFile}
+            // onChange={(e) => 
+            //   setPictureFile(e.target.files[0])}
+        />
+          </div>
+          <div className="form-group mt-3">
+            <label>Email address</label>
+            <input
+              type="email"
+              className="form-control mt-1"
+              placeholder="Email Address"
+            />
+          </div>
+
+          <div className="form-group mt-3">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control mt-1"
+              placeholder="Password"
+            />
+          </div>
+          <div className="d-grid gap-2 mt-3">
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  )
+}
+ export default Login;
