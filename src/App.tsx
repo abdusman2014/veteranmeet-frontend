@@ -1,23 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
+
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import './App.css';
 import HomeScreen from './Screen/HomeScreen';
 
+
+import Login from './Screen/Login'
+import Register from './Screen/Register'
+
+import "bootstrap/dist/css/bootstrap.min.css"
+
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <HomeScreen/>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+      <Route path="/" element={ <Login/> } />
+      <Route path="/register" element={ <Register/> } />
+      <Route path="/home" element={ <HomeScreen/> } />
+      </Routes>
+    </Router>
+
   );
 }
 
