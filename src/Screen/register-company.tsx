@@ -4,13 +4,14 @@ import "./Login.css"
 
 import { useNavigate } from "react-router-dom";
 
-const Login = function () {
+const RegisterCompany = function () {
 
-  const [userName, setuserName] = useState("");
-  const [password, setPassword] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [owner, setOwner] = useState("");
+
   let navigate = useNavigate();
 
-  const handlLogin = (evt: any) => {
+  const handleRegister = (evt: any) => {
       evt.preventDefault();
 
       navigate("/home");
@@ -21,27 +22,26 @@ const Login = function () {
       <h1 className="heading">Veteran Meet</h1>
     <div className="body">
     <div className="box">
-      <h1>Sign In</h1>
-          <form onSubmit={handlLogin}>
+      <h1>Register Company</h1>
+          <form onSubmit={handleRegister}>
       <label>
-        Username:
+        companyName:
         <input
           type="text"
-          value={userName}
-          onChange={e => setuserName(e.target.value)}
+          value={companyName}
+          onChange={e => setCompanyName(e.target.value)}
+        />
+      </label>
+      <label>
+        Owner:
+        <input
+          type="text"
+          value={owner}
+          onChange={e => setOwner(e.target.value)}
         />
       </label>
       <br/>
-      <label>
-        Password:
-        <input
-          type="text"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-      </label>
-      <br/>
-      <input type="submit" value="Login" className="btn"/>
+      <input type="submit" value="Register" className="btn"/>
     </form>
     </div>
     </div>
@@ -49,4 +49,4 @@ const Login = function () {
   );
 }
 
- export default Login;
+ export default RegisterCompany;

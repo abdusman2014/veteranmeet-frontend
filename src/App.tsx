@@ -9,6 +9,7 @@ import HomeScreen from './Screen/HomeScreen';
 
 import Login from './Screen/Login'
 import Register from './Screen/Register'
+import RegisterCompany from './Screen/register-company'
 
 import "bootstrap/dist/css/bootstrap.min.css"
 
@@ -20,6 +21,7 @@ function App() {
       <Route path="/" element={ <Login/> } />
       <Route path="/register" element={ <Register/> } />
       <Route path="/home" element={ <HomeScreen/> } />
+      <Route path="/register-company" element={ <RegisterCompany/> } />
       </Routes>
     </Router>
   );

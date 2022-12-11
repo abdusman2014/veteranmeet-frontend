@@ -2,26 +2,35 @@
 import React, { useState } from "react"
 import "./Login.css"
 
+import { useNavigate } from "react-router-dom";
+
 const Register = function () {
 
     const [name, setName] = useState("");
     const [age, setAge] = useState("");
-    const [interest, setInterest] = useState("");
+    const [company , setCompany] = useState("");
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
-  const [username, setusername] = useState("");
+  const [userName, setuserName] = useState("");
   const [password, setPassword] = useState("");
+  let navigate = useNavigate();
 
   const handleSubmit = (evt: any) => {
       evt.preventDefault();
-      alert(`Submitting Name ${username}`)
+      navigate("/home");
   }
   return (
-    <div className="login-form">
+    <div >
+      <h1 className="heading">Veteran Meet</h1>
+    <div className="body">
+    <div className="box">
+      <h1>Register</h1>
           <form onSubmit={handleSubmit}>
 
           <label>
         Full Name:
         <input
+        className="input"
           type="text"
           value={name}
           onChange={e => setName(e.target.value)}
@@ -31,6 +40,7 @@ const Register = function () {
       <label>
         Age:
         <input
+            className="input"
           type="number"
           value={age}
           onChange={e => setAge(e.target.value)}
@@ -38,21 +48,37 @@ const Register = function () {
       </label>
       <br/>
       <label>
-        Area of Interest:
+        Company:
         <input
+        className="input"
           type="text"
-          value={interest}
-          onChange={e => setInterest(e.target.value)}
+          value={company }
+          onChange={e => setCompany (e.target.value)}
         />
       </label>
       <br/>
 
       <label>
-        Username:
+        ProgilePicture:
         <input
+        className="input"
+        type="file"
+        name="myImage"
+        onChange={(event) => {
+            if(event.target.files)
+                setSelectedImage(event.target.files[0]);
+        }}
+      />
+      </label>
+      <br/>
+
+      <label>
+        UserName:
+        <input
+        className="input"
           type="text"
-          value={username}
-          onChange={e => setusername(e.target.value)}
+          value={userName}
+          onChange={e => setuserName(e.target.value)}
         />
       </label>
       <br/>
@@ -60,16 +86,18 @@ const Register = function () {
       <label>
         Password:
         <input
+        className="input"
           type="text"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
       </label>
       <br/>
-      <input type="submit" value="Register" />
+      <input type="submit" value="Register" className="btn" />
     </form>
     </div>
-
+    </div>
+    </div>
   );
 }
 
