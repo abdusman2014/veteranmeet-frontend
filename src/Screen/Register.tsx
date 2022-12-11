@@ -1,101 +1,76 @@
+
 import React, { useState } from "react"
+import "./Login.css"
 
 const Register = function () {
-  let [authMode, setAuthMode] = useState("signin")
 
-  const changeAuthMode = () => {
-    setAuthMode(authMode === "signin" ? "signup" : "signin")
+    const [name, setName] = useState("");
+    const [age, setAge] = useState("");
+    const [interest, setInterest] = useState("");
+
+  const [username, setusername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (evt: any) => {
+      evt.preventDefault();
+      alert(`Submitting Name ${username}`)
   }
-
-  if (authMode === "signin") {
-    return (
-      <div className="Auth-form-container">
-        <form className="Auth-form">
-          <div className="Auth-form-content">
-            <h3 className="Auth-form-title">Sign In</h3>
-            <div className="text-center">
-              Not registered yet?{" "}
-              <span className="link-primary" onClick={changeAuthMode}>
-                Sign Up
-              </span>
-            </div>
-            <div className="form-group mt-3">
-              <label>Email address</label>
-              <input
-                type="email"
-                className="form-control mt-1"
-                placeholder="Enter email"
-              />
-            </div>
-            <div className="form-group mt-3">
-              <label>Password</label>
-              <input
-                type="password"
-                className="form-control mt-1"
-                placeholder="Enter password"
-              />
-            </div>
-            <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </div>
-            <p className="text-center mt-2">
-              Forgot <a href="#">password?</a>
-            </p>
-          </div>
-        </form>
-      </div>
-    )
-  }
-
   return (
-    <div className="Auth-form-container">
-      <form className="Auth-form">
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Sign In</h3>
-          <div className="text-center">
-            Already registered?{" "}
-            <span className="link-primary" onClick={changeAuthMode}>
-              Sign In
-            </span>
-          </div>
-          <div className="form-group mt-3">
-            <label>Full Name</label>
-            <input
-              type="email"
-              className="form-control mt-1"
-              placeholder="e.g Jane Doe"
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Email address</label>
-            <input
-              type="email"
-              className="form-control mt-1"
-              placeholder="Email Address"
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control mt-1"
-              placeholder="Password"
-            />
-          </div>
-          <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </div>
-          <p className="text-center mt-2">
-            Forgot <a href="#">password?</a>
-          </p>
-        </div>
-      </form>
+    <div className="login-form">
+          <form onSubmit={handleSubmit}>
+
+          <label>
+        Full Name:
+        <input
+          type="text"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
+      </label>
+      <br/>
+      <label>
+        Age:
+        <input
+          type="number"
+          value={age}
+          onChange={e => setAge(e.target.value)}
+        />
+      </label>
+      <br/>
+      <label>
+        Area of Interest:
+        <input
+          type="text"
+          value={interest}
+          onChange={e => setInterest(e.target.value)}
+        />
+      </label>
+      <br/>
+
+      <label>
+        Username:
+        <input
+          type="text"
+          value={username}
+          onChange={e => setusername(e.target.value)}
+        />
+      </label>
+      <br/>
+
+      <label>
+        Password:
+        <input
+          type="text"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+      </label>
+      <br/>
+      <input type="submit" value="Register" />
+    </form>
     </div>
-  )
+
+  );
 }
 
-export default Register;
+ export default Register;
