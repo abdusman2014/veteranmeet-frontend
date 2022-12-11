@@ -4,9 +4,12 @@ import InputField from "../../Components/Auth/InputField";
 import Navbar from "../../Navigation";
 import defaultStyle from "../../Config/styles";
 
-import { events, Event } from "../../Data/EventsMockData";
+import { Event } from "../../Data/EventsMockData";
+
+import eventStore from "../../State Management/eventState";
 
 function AddEvents(props: any) {
+    const {addEvent} = eventStore();
   const [eventName, seteventName] = useState("");
   const [company, setCompany] = useState("");
   const [description, setDescription] = useState("");
@@ -61,8 +64,8 @@ function AddEvents(props: any) {
                 GoingPeople: [],
                 eventDescription: description,
               };
-              events.push(event);
-              alert("Event Added Successfully");
+              addEvent(event);
+              alert("Event Added Successfully!");
             }}
           />
         </div>

@@ -1,13 +1,14 @@
 import React, { useEffect, useState,useRef } from "react";
 import AppEvents from "../../Components/AppEvents/AppEvents";
 import UserDetails from "../../Components/Profile/UserDetails";
-import { events, User, Event } from "../../Data/EventsMockData";
+import {  User, Event } from "../../Data/EventsMockData";
 import "./ProfileScreen.css";
 import userStore from "../../State Management/UserState";
+import eventStore from "../../State Management/eventState";
 import defaultStyle from '../../Config/styles'
 import Navbar from "../../Navigation";
 
-function fetchSharedEvents(sharedEventIds: String[]) {
+function fetchSharedEvents(sharedEventIds: String[], events: Event[]) {
     console.log('share: ',sharedEventIds);
   let result: Event[] = [];
   sharedEventIds.forEach((eventId) => {
@@ -21,12 +22,13 @@ function fetchSharedEvents(sharedEventIds: String[]) {
   return result;
 }
 function ProfileScreen(props: any) {
+
   //let sharedEvents: Event[] = [];
   const {user} = userStore();
- 
+ const {events} = eventStore();
   const [sharedEvents,setSharedEvents] = useState<Event[]>([])
   useEffect(() => {
-    setSharedEvents(fetchSharedEvents(user?.sharedEventIds ?? []));
+    setSharedEvents(fetchSharedEvents(user?.sharedEventIds ?? [], events));
     console.log('user:: ',user);
   }, []);
   return (

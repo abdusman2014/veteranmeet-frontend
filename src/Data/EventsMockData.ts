@@ -54,17 +54,7 @@ const events: Event[] = [
   },
 ];
 
-const user: User = {
-  userId: "1234",
-  userName: "abdullah",
-  password: "1234",
-  age: 23,
-  company: "connectia",
-  intrestedEventsId: [],
-  notIntrestedEventsId: [],
-  goingEventsId: [],
-  sharedEventIds: [],
-};
+
 
 const status = {
   intrested: 'intrested',
@@ -72,4 +62,4 @@ const status = {
   going: 'going'
 }
 export type { Event, User };
-export { events, user, status };
+export {  status };

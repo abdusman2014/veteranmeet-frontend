@@ -3,7 +3,7 @@ import "./AppEvents.css";
 
 import logo from "../../logo.svg";
 import EventsButton from "./EventsButton";
-import { Event, events, status, User } from "../../Data/EventsMockData";
+import { Event,  status, User } from "../../Data/EventsMockData";
 import userStore from "../../State Management/UserState";
 
 import { AiFillStar, AiOutlineCheckCircle } from "react-icons/ai";

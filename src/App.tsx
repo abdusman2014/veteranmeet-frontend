@@ -9,7 +9,7 @@ import ProfileScreen from "./Screen/ProfileScreen/ProfileScreen";
 import "./App.css";
 
 import Login from "./Screen/Auth/Login";
-import Register from "./Screen/Auth/Register";
+import SignUp from "./Screen/Auth/SignUp";
 import RegisterCompany from "./Screen/Auth/register-company";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -21,7 +21,7 @@ function App() {
       {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<SignUp />} />
         <Route path="/register-company" element={<RegisterCompany />} />
         <Route path="/home" element={<HomeScreen />} />
         <Route path="/addEvents" element={<AddEvents />} />

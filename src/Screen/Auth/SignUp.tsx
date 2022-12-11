@@ -10,7 +10,7 @@ import EventsButton from "../../Components/AppEvents/EventsButton";
 import InputField from "../../Components/Auth/InputField";
 import defaultStyle from "../../Config/styles";
 
-const Register = function () {
+const SignUp = function () {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const { setUser } = userStore();
@@ -88,4 +88,4 @@ const Register = function () {
   );
 };
 
-export default Register;
+export default SignUp;
