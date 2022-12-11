@@ -1,0 +1,194 @@
+import React, { useEffect, useState } from "react";
+import "./AppEvents.css";
+
+import logo from "../../logo.svg";
+import EventsButton from "./EventsButton";
+import { Event, user, status } from "../../Data/EventsMockData";
+
+import { AiFillStar, AiOutlineCheckCircle } from "react-icons/ai";
+import { RxCrossCircled } from "react-icons/rx";
+import { RiShareForwardFill } from "react-icons/ri";
+
+function setStatusEvent(event: Event) {
+  let userStatus = "";
+  event.intrestedPeople.forEach((item) => {
+    if (item === user.userName) {
+      userStatus = status.intrested;
+      return;
+    }
+  });
+  if (userStatus === "") {
+    event.notIntrestedPeople.forEach((item) => {
+      if (item === user.userName) {
+        userStatus = status.notIntrested;
+        return;
+      }
+    });
+  }
+  if (userStatus === "") {
+    event.GoingPeople.forEach((item) => {
+      if (item === user.userName) {
+        userStatus = status.going;
+        return;
+      }
+    });
+  }
+
+  return userStatus;
+}
+
+function AppEvents(props: any) {
+  const [userStatus, setUserStatus] = useState("");
+  const month = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const event: Event = props.event;
+  useEffect(() => {
+    setUserStatus(setStatusEvent(event));
+  }, []);
+  return (
+    <div className="Container">
+      <img src={require("../../assets/images/event.jpeg")} className="img" />
+      <div className="Event-details">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            marginRight: 32,
+          }}
+        >
+          <b style={{ color: "red", fontSize: 24 }}>
+            {month[event.eventDate.getMonth()]}
+          </b>
+          <small style={{ fontSize: 28 }}>{event.eventDate.getDate()}</small>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "start",
+          }}
+        >
+          <b style={{ fontSize: 24 }}>{event.eventName}</b>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <small style={{ fontSize: 18, opacity: 0.5, marginRight: 8 }}>
+              Public.{" "}
+            </small>
+            <small style={{ fontSize: 18, opacity: 0.5, marginRight: 8 }}>
+              Hosted by
+            </small>
+            {event.organizingCompanies.length > 0 &&
+              event.organizingCompanies.map((item) => (
+                <div>
+                  <small style={{ fontSize: 18, opacity: 0.8, marginRight: 6 }}>
+                    {item}
+                  </small>
+                  {item !=
+                    event.organizingCompanies[
+                      event.organizingCompanies.length - 1
+                    ] && (
+                    <small
+                      style={{ fontSize: 18, opacity: 0.5, marginRight: 6 }}
+                    >
+                      and
+                    </small>
+                  )}
+                </div>
+              ))}
+          </div>
+        </div>
+      </div>
+      <p style={{ marginLeft: 24, fontWeight: "bold" }}>
+        {event.eventDescription}
+      </p>
+      <div className="Event-details">
+        <EventsButton
+          color={userStatus === status.intrested ? "blue" : "black"}
+          icon={
+            <AiFillStar
+              size={18}
+              style={{
+                color: userStatus === status.intrested ? "blue" : "black",
+              }}
+            />
+          }
+          text={status.intrested}
+          onPress={() => {
+            if (userStatus === status.intrested) {
+              setUserStatus("");
+            } else {
+              setUserStatus(status.intrested);
+            }
+            console.log("press");
+          }}
+        />
+        <EventsButton
+          color={userStatus === status.notIntrested ? "blue" : "black"}
+          icon={
+            <RxCrossCircled
+              size={18}
+              style={{
+                color: userStatus === status.notIntrested ? "blue" : "black",
+              }}
+            />
+          }
+          text={status.notIntrested}
+          onPress={() => {
+            if (userStatus === status.notIntrested) {
+              setUserStatus("");
+            } else {
+              setUserStatus(status.notIntrested);
+            }
+          }}
+        />
+        <EventsButton
+          color={userStatus === status.going ? "blue" : "black"}
+          icon={
+            <AiOutlineCheckCircle
+              size={18}
+              style={{ color: userStatus === status.going ? "blue" : "black" }}
+            />
+          }
+          text={status.going}
+          onPress={() => {
+            if (userStatus === status.going) {
+              setUserStatus("");
+            } else {
+              setUserStatus(status.going);
+            }
+          }}
+        />
+        <div style={{ flex: 1 }} />
+        {(props.isFromProfileScreen === undefined) &&<EventsButton
+          color={"black"}
+          icon={<RiShareForwardFill size={18} style={{ color: "black" }} />}
+          text={"Share"}
+          onPress={() => {
+            //TODO: add share functionality
+            user.sharedEventIds.push(event.eventId);
+            alert("Shared to your profile!");
+          }}
+        />}
+      </div>
+    </div>
+  );
+}
+
+export default AppEvents;
