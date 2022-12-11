@@ -16,6 +16,12 @@ const Login = function () {
       navigate("/home");
 
   }
+  const handleSignUp = (evt: any) => {
+    evt.preventDefault();
+
+    navigate("/register");
+
+}
   return (
     <div >
       <h1 className="heading">Veteran Meet</h1>
@@ -42,6 +48,12 @@ const Login = function () {
       </label>
       <br/>
       <input type="submit" value="Login" className="btn"/>
+      <br/>
+      <br/>
+    </form>
+    <form onSubmit= {handleSignUp}>
+    <p>Donot have account</p>
+    <input type="submit" value="SignUp" className="btn"/>
     </form>
     </div>
     </div>
