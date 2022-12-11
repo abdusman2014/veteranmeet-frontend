@@ -8,9 +8,9 @@ import ProfileScreen from "./Screen/ProfileScreen/ProfileScreen";
 
 import "./App.css";
 
-import Login from "./Screen/Login";
-import Register from "./Screen/Register";
-import RegisterCompany from "./Screen/register-company";
+import Login from "./Screen/Auth/Login";
+import Register from "./Screen/Auth/Register";
+import RegisterCompany from "./Screen/Auth/register-company";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddEvents from "./Screen/AddEvents/AddEvents";

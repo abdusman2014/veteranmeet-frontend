@@ -21,9 +21,11 @@ function EventsButton(props: any) {
             borderColor: props.color,
            borderStyle: 'solid',
             borderWidth: 2,
+            alignItems: 'center',
+            justifyContent: 'center',
             marginRight: 8,
         }} onClick={props.onPress} >
-            {props.icon}
+            {(props.icon !== null ) && props.icon}
             <small style={{marginLeft: 6, color: props.color}}>{props.text}</small>
         </div>
        
