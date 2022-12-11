@@ -37,7 +37,7 @@ return (
 		{/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
 		</NavMenu>
 		<NavBtn>
-		<NavBtnLink to='/signin'>Sign Out</NavBtnLink>
+		<NavBtnLink to='/'>Sign Out</NavBtnLink>
 		</NavBtn>
 	</Nav>
 	</>

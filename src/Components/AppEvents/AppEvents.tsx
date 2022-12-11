@@ -3,13 +3,14 @@ import "./AppEvents.css";
 
 import logo from "../../logo.svg";
 import EventsButton from "./EventsButton";
-import { Event, user, status } from "../../Data/EventsMockData";
+import { Event, events, status, User } from "../../Data/EventsMockData";
+import userStore from "../../State Management/UserState";
 
 import { AiFillStar, AiOutlineCheckCircle } from "react-icons/ai";
 import { RxCrossCircled } from "react-icons/rx";
 import { RiShareForwardFill } from "react-icons/ri";
 
-function setStatusEvent(event: Event) {
+function setStatusEvent(event: Event, user: User) {
   let userStatus = "";
   event.intrestedPeople.forEach((item) => {
     if (item === user.userName) {
@@ -38,6 +39,7 @@ function setStatusEvent(event: Event) {
 }
 
 function AppEvents(props: any) {
+  const { user, setUser } = userStore();
   const [userStatus, setUserStatus] = useState("");
   const month = [
     "Jan",
@@ -55,7 +57,7 @@ function AppEvents(props: any) {
   ];
   const event: Event = props.event;
   useEffect(() => {
-    setUserStatus(setStatusEvent(event));
+    setUserStatus(setStatusEvent(event, user!));
   }, []);
   return (
     <div className="Container">
@@ -133,8 +135,15 @@ function AppEvents(props: any) {
           onPress={() => {
             if (userStatus === status.intrested) {
               setUserStatus("");
+              const index = event.intrestedPeople.indexOf(user?.userName ?? "");
+              if (index > -1) {
+                // only splice array when item is found
+                event.intrestedPeople.splice(index, 1); // 2nd parameter means remove one item only
+              }
+              //event.GoingPeople.pop(user?.userName);
             } else {
               setUserStatus(status.intrested);
+              event.intrestedPeople.push(user?.userName ?? "");
             }
             console.log("press");
           }}
@@ -153,8 +162,17 @@ function AppEvents(props: any) {
           onPress={() => {
             if (userStatus === status.notIntrested) {
               setUserStatus("");
+              const index = event.notIntrestedPeople.indexOf(
+                user?.userName ?? ""
+              );
+              if (index > -1) {
+                // only splice array when item is found
+                event.notIntrestedPeople.splice(index, 1); // 2nd parameter means remove one item only
+              }
+              //event.GoingPeople.pop(user?.userName);
             } else {
               setUserStatus(status.notIntrested);
+              event.notIntrestedPeople.push(user?.userName ?? "");
             }
           }}
         />
@@ -170,22 +188,38 @@ function AppEvents(props: any) {
           onPress={() => {
             if (userStatus === status.going) {
               setUserStatus("");
+              const index = event.GoingPeople.indexOf(user?.userName ?? "");
+              if (index > -1) {
+                // only splice array when item is found
+                event.GoingPeople.splice(index, 1); // 2nd parameter means remove one item only
+              }
+              //event.GoingPeople.pop(user?.userName);
             } else {
               setUserStatus(status.going);
+              event.GoingPeople.push(user?.userName ?? "");
             }
           }}
         />
         <div style={{ flex: 1 }} />
-        {(props.isFromProfileScreen === undefined) &&<EventsButton
-          color={"black"}
-          icon={<RiShareForwardFill size={18} style={{ color: "black" }} />}
-          text={"Share"}
-          onPress={() => {
-            //TODO: add share functionality
-            user.sharedEventIds.push(event.eventId);
-            alert("Shared to your profile!");
-          }}
-        />}
+        {props.isFromProfileScreen === undefined && (
+          <EventsButton
+            color={"black"}
+            icon={<RiShareForwardFill size={18} style={{ color: "black" }} />}
+            text={"Share"}
+            onPress={() => {
+              //TODO: add share functionality
+              //user.sharedEventIds.push(event.eventId);
+              if (user === null) {
+                return;
+              }
+              const temp: User = user;
+              temp.sharedEventIds.push(event.eventId);
+              setUser(temp);
+
+              alert("Shared to your profile!");
+            }}
+          />
+        )}
       </div>
     </div>
   );

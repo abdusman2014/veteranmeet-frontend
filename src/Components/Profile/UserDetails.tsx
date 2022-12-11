@@ -16,7 +16,7 @@ function UserDetails(props: any) {
           justifyContent: "center",
         }}
       >
-        <b style={{ fontSize: 24 }}>{"Name: " + user.userName.toUpperCase()}</b>
+        <b style={{ fontSize: 24 }}>{"Name: " + user.userName}</b>
         <small style={{ marginTop: 8, fontSize: 24 }}>
           {"Age: " + user.age}
         </small>

@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import AppEvents from "../../Components/AppEvents/AppEvents";
 import UserDetails from "../../Components/Profile/UserDetails";
-import { events, user, Event } from "../../Data/EventsMockData";
+import { events, User, Event } from "../../Data/EventsMockData";
 import "./ProfileScreen.css";
-import defaultStyle from "../../Config/styles";
+import userStore from "../../State Management/UserState";
+import defaultStyle from '../../Config/styles'
+import Navbar from "../../Navigation";
 
 function fetchSharedEvents(sharedEventIds: String[]) {
     console.log('share: ',sharedEventIds);
@@ -20,12 +22,16 @@ function fetchSharedEvents(sharedEventIds: String[]) {
 }
 function ProfileScreen(props: any) {
   //let sharedEvents: Event[] = [];
+  const {user} = userStore();
+ 
   const [sharedEvents,setSharedEvents] = useState<Event[]>([])
   useEffect(() => {
-    setSharedEvents(fetchSharedEvents(user.sharedEventIds));
+    setSharedEvents(fetchSharedEvents(user?.sharedEventIds ?? []));
+    console.log('user:: ',user);
   }, []);
   return (
     <div>
+       <Navbar />
       <UserDetails user={user} />
       <div
         style={{
@@ -43,3 +49,7 @@ function ProfileScreen(props: any) {
 }
 
 export default ProfileScreen;
+function userRef() {
+  throw new Error("Function not implemented.");
+}
+
